@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painting Info</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <a href="/painting/new">Add Painting</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </header>
+        <h1>{{painting.title}}</h1>
+        <p>Painted by: 
+            {% for user in users %}
+                {% if user.id == painting.user_id %}
+                    {{user.first_name}} {{user.last_name}}
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p>Description: {{painting.description}}</p>
+        <p>Price: ${{painting.price}}</p>
+        <p>Number Purchased: {{painting.quantity_sold}}</p>
+
+        {% if painting.quantity_sold == painting.quantity_made %}
+        <p>Sold out</p>
+        {% else %}
+        <a href="/painting/purchase/{{painting.id}}">Buy</a>
+        {% endif %}
+    </div>
+</body>
+</html>
